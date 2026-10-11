@@ -1,0 +1,30 @@
+:root { font-family: Inter, "Segoe UI", Arial, sans-serif; color: #1f2937; background: #f3f6fb; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+.hero { background: #14213d; color: white; padding: 28px max(22px, calc((100% - 1400px)/2)); display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.hero h1 { margin: 4px 0 8px; font-size: clamp(26px, 4vw, 38px); }
+.hero p { margin: 0; color: #d7e2f2; }
+.eyebrow { letter-spacing: .18em; font-size: 12px; font-weight: 800; }
+button { background: #fca311; color: #14213d; border: 0; padding: 12px 17px; border-radius: 9px; font-weight: 800; cursor:pointer; }
+button:hover { filter: brightness(1.04); }
+main { max-width: 1400px; padding: 22px; margin: auto; }
+.message { padding: 10px 13px; border-radius: 8px; margin-bottom: 15px; background: #e5edf8; }
+.message.error { background: #fee2e2; color: #991b1b; }
+.kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:18px; }
+.kpi,.panel { background:white; border:1px solid #e3e8f0; border-radius:14px; padding:18px; box-shadow:0 4px 16px rgba(20,33,61,.04); min-width:0; }
+.kpi span { display:block; color:#64748b; font-size:13px; margin-bottom:10px; }
+.kpi strong { font-size:clamp(20px,2.3vw,30px); color:#14213d; }
+.grid { display:grid; gap:18px; margin-bottom:18px; }
+.two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.panel h2 { margin:0 0 6px; font-size:19px; }
+.muted { color:#64748b; font-size:13px; line-height:1.5; }
+canvas { max-height:280px; margin:15px 0; }
+.table-wrap { width:100%; overflow:auto; max-height:300px; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th,td { text-align:left; padding:9px 10px; border-bottom:1px solid #edf0f5; white-space:nowrap; }
+th { background:#f8fafc; color:#475569; position:sticky; top:0; }
+.plain-list { padding-left:20px; line-height:1.9; }
+.concept-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.concept-list span { padding:8px 10px; border-radius:999px; background:#e8eef8; color:#253858; font-size:12px; font-weight:700; }
+@media(max-width:900px) { .kpis { grid-template-columns:repeat(2,1fr); } .two { grid-template-columns:1fr; } }
+@media(max-width:500px) { main { padding:12px; } .kpis { grid-template-columns:1fr 1fr; gap:9px; } .kpi { padding:13px; } }

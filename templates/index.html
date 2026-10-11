@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sales Analytics Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">SQL MINI PROJECT</p>
+      <h1>Sales Analytics Dashboard</h1>
+      <p>Dimensional model · Window functions · CTE · Month-over-month growth</p>
+    </div>
+    <button id="refreshBtn">Refresh summary table</button>
+  </header>
+
+  <main>
+    <div id="message" class="message">Loading dashboard…</div>
+
+    <section class="kpis">
+      <article class="kpi"><span>Total revenue</span><strong id="revenue">—</strong></article>
+      <article class="kpi"><span>Orders</span><strong id="orders">—</strong></article>
+      <article class="kpi"><span>Customers who purchased</span><strong id="customers">—</strong></article>
+      <article class="kpi"><span>Average order value</span><strong id="average">—</strong></article>
+    </section>
+
+    <section class="grid two">
+      <article class="panel">
+        <h2>Monthly revenue</h2>
+        <p class="muted">Recursive CTE + LAG/LEAD + window frames</p>
+        <canvas id="monthlyChart"></canvas>
+        <div class="table-wrap"><table><thead><tr><th>Month</th><th>Revenue</th><th>MoM growth</th><th>Running total</th><th>3-month average</th></tr></thead><tbody id="monthlyRows"></tbody></table></div>
+      </article>
+      <article class="panel">
+        <h2>Top products</h2>
+        <p class="muted">RANK and DENSE_RANK window functions</p>
+        <canvas id="productsChart"></canvas>
+        <div class="table-wrap"><table><thead><tr><th>Product</th><th>Category</th><th>Revenue</th><th>Rank</th><th>Dense rank</th></tr></thead><tbody id="productRows"></tbody></table></div>
+      </article>
+    </section>
+
+    <section class="grid two">
+      <article class="panel">
+        <h2>Customer spend quartiles</h2>
+        <p class="muted">NTILE(4) divides purchasing customers into four groups.</p>
+        <div class="table-wrap"><table><thead><tr><th>Customer</th><th>Total spend</th><th>Quartile</th></tr></thead><tbody id="customerRows"></tbody></table></div>
+      </article>
+      <article class="panel">
+        <h2>Store/category summaries</h2>
+        <p class="muted">ROLLUP plus UNION ALL emulation of GROUPING SETS/CUBE.</p>
+        <div class="table-wrap"><table><thead><tr><th>Store</th><th>Category</th><th>Revenue</th><th>Summary level</th></tr></thead><tbody id="groupRows"></tbody></table></div>
+      </article>
+    </section>
+
+    <section class="grid two">
+      <article class="panel">
+        <h2>Customers with no orders</h2>
+        <p class="muted">NOT EXISTS / LEFT JOIN analysis</p>
+        <ul id="inactiveList" class="plain-list"></ul>
+      </article>
+      <article class="panel">
+        <h2>Precomputed monthly category summary</h2>
+        <p class="muted">MySQL does not have native materialized views; this project uses a summary table refreshed by the button above.</p>
+        <div class="table-wrap"><table><thead><tr><th>Month</th><th>Category</th><th>Revenue</th></tr></thead><tbody id="summaryRows"></tbody></table></div>
+      </article>
+    </section>
+
+    <section class="panel concepts">
+      <h2>SQL concepts covered</h2>
+      <div class="concept-list">
+        <span>Scalar subquery</span><span>Correlated subquery</span><span>EXISTS / NOT EXISTS</span>
+        <span>1NF / 2NF / 3NF</span><span>RANK / DENSE_RANK</span><span>LAG / LEAD</span>
+        <span>NTILE and window frames</span><span>Recursive CTE</span><span>UNION / INTERSECT / EXCEPT*</span>
+        <span>ROLLUP</span><span>CUBE / GROUPING SETS emulation</span><span>View / summary table</span>
+      </div>
+      <p class="muted">* INTERSECT and EXCEPT require MySQL 8.0.31 or later. On older versions, use the compatibility queries in sql/02_advanced_queries.sql.</p>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
